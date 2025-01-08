@@ -1,4 +1,15 @@
-This is a companion GitHub page for the paper titled, "A Tutorial on the Use of Artificial Intelligence Tools for Facial Emotion Recognition in R". It primarily serves to include details about the tutorial that could not be included within the paper itself. That includes the sample video from the RAVDESS data set, which is featured in the paper, sample code for easy copy-and-paste, and other illustrative examples that may help with the installation and initialization of software. If any code or tutorial instructions are not working/up-to-date, feel free to let us know under the issues column. Thank you!
+# A Tutorial on the Use of Artificial Intelligence Tools for Facial Emotion Recognition in R
+
+Wyman, A. & Zhang, Z. (in press). A Tutorial on the Use of Artificial Intelligence Tools for Facial Emotion Recognition in R. Multivariate Behavioral Research.
+
+This is a companion GitHub page for the paper titled, "A Tutorial on the Use of Artificial Intelligence Tools for Facial Emotion Recognition in R". It primarily serves to include details about the tutorial that could not be included within the paper itself. The following information is available:
+  
+  - [The sample video from the RAVDESS data set](RAVDESS)
+  - [How to install py-feat and visualization](#install-py-feat)
+  - [Google access key and authorization](#use-google-cloud)
+  - [Amazon Rekognition access key and authorization](#use-amazon-rekognition)
+
+
 
 # Install py-feat
 
@@ -165,4 +176,6 @@ Sys.setenv(
 )
 ```
 
+## Questions
+If any code or tutorial instructions are not working/up-to-date, feel free to let us know. Thank you!
 
