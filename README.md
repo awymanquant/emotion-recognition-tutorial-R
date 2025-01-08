@@ -22,9 +22,27 @@ res <- detector$detect_image("image_000001.jpg")
 res
 ```
 
-To use Google and Amazon services, API keys are needed. The tutorials below show how to obtain the API keys.
+## Visualization the action units in py-feat
+The following code is used to visualize the action units.
+
+```{python}
+!pip install scikit-learn==1.3.0
+!pip install py-feat
+!pip install matplotlib
+
+import feat
+detector = feat.Detector()
+res = detector.detect_image("myimagefolder/image_000002.jpeg")
+figs = res.plot_detections(faces="aus", muscles=True, add_titles=False)
+
+import matplotlib.pyplot as plt
+plt.show(figs)
+```
+
+
 
 # Use Google Cloud
+To use Google and Amazon services, API keys are needed. The tutorials below show how to obtain the API keys.
 
 ## Enable the API
 
