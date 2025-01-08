@@ -1,5 +1,29 @@
 This is a companion GitHub page for the paper titled, "A Tutorial on the Use of Artificial Intelligence Tools for Facial Emotion Recognition in R". It primarily serves to include details about the tutorial that could not be included within the paper itself. That includes the sample video from the RAVDESS data set, which is featured in the paper, sample code for easy copy-and-paste, and other illustrative examples that may help with the installation and initialization of software. If any code or tutorial instructions are not working/up-to-date, feel free to let us know under the issues column. Thank you!
 
+# Install py-feat
+
+To use py-feat within R, we can use `reticulate`. The following code can be used to set it up.
+
+```
+## Install py-feat
+library(reticulate)
+install_python('3.8.10')
+use_python_version('3.8.10')
+virtualenv_create('r-py-feat', python='3.8.10')
+virtualenv_install("r-py-feat","py-feat")
+
+
+## test installation
+use_virtualenv("r-py-feat")
+
+feat <- import("feat")
+detector <- feat$Detector()
+res <- detector$detect_image("image_000001.jpg")
+res
+```
+
+To use Google and Amazon services, API keys are needed. The tutorials below show how to obtain the API keys.
+
 # Use Google Cloud
 
 ## Enable the API
@@ -8,47 +32,46 @@ To use Google Cloud, we need to set up the API services. Here is a brief tutoria
 
 1. To start, to to Google Cloud console at [https://console.cloud.google.com/](https://console.cloud.google.com/)
 
-<img src="/_media/classes/rdatascience/screenshot_2024-10-31_at_8.35.46%E2%80%AFpm.png?w=600&amp;tok=7bd68d" class="media" loading="lazy" alt="" width="600" />
+![](images/google1.png)
 
 2. Click on nd.edu > first project or sth else there and in the popup window to create a new project.
 
-<img src="/_media/classes/rdatascience/screenshot_2024-10-31_at_8.41.12%E2%80%AFpm.png?w=600&amp;tok=2c1707" class="media" loading="lazy" alt="" width="600" />
+![](images/google2.png)
 
 3. Select the newly created project and then click on "API and Services"
 
-<img src="/_media/classes/rdatascience/screenshot_2024-10-31_at_8.43.36%E2%80%AFpm.png?w=600&amp;tok=5b74db" class="media" loading="lazy" alt="" width="600" />
+![](images/google3.png)
 
 4. Then click on "+ENABLE APIS AND SERVICES"
 
-<img src="/_media/classes/rdatascience/screenshot_2024-10-31_at_8.45.42%E2%80%AFpm.png?w=600&amp;tok=32d794" class="media" loading="lazy" alt="" width="600" />
+![](images/google4.png)
 
 5. Select or search for "Cloud Vision API" and enable it.
 
-<img src="/_media/classes/rdatascience/screenshot_2024-10-31_at_8.47.09%E2%80%AFpm.png?w=600&amp;tok=47a0d6" class="media" loading="lazy" alt="" width="600" />
-
-<img src="/_media/classes/rdatascience/screenshot_2024-10-31_at_8.48.32%E2%80%AFpm.png?w=600&amp;tok=469624" class="media" loading="lazy" alt="" width="600" />
+![](images/google5.png)
+![](images/google6.png)
 
 6. Click on "Create credentials"
 
-<img src="/_media/classes/rdatascience/screenshot_2024-10-31_at_8.49.52%E2%80%AFpm.png?w=600&amp;tok=35ef73" class="media" loading="lazy" alt="" width="600" />
+![](images/google7.png)
 
 7. Now create the credentials following each step. 
 
-<img src="/_media/classes/rdatascience/screenshot_2024-10-31_at_8.52.04%E2%80%AFpm.png?w=600&amp;tok=f62487" class="media" loading="lazy" alt="" width="600" />
-<img src="/_media/classes/rdatascience/screenshot_2024-10-31_at_8.52.57%E2%80%AFpm.png?w=600&amp;tok=51b4eb" class="media" loading="lazy" alt="" width="600" />
+![](images/google8.png)
+![](images/google9.png)
 
 One can specify the scope of the APIs. Here we choose Cloud Vision.
 
-<img src="/_media/classes/rdatascience/screenshot_2024-10-31_at_8.53.40%E2%80%AFpm.png?w=600&amp;tok=1d7024" class="media" loading="lazy" alt="" width="600" />
-<img src="/_media/classes/rdatascience/screenshot_2024-10-31_at_8.54.17%E2%80%AFpm.png?w=600&amp;tok=dc440d" class="media" loading="lazy" alt="" width="600" />
+![](images/google10.png)
+![](images/google11.png)
 
 Now create the client ID
 
-<img src="/_media/classes/rdatascience/screenshot_2024-10-31_at_8.58.25%E2%80%AFpm.png?w=600&amp;tok=728de1" class="media" loading="lazy" alt="" width="600" />
+![](images/google12.png)
 
 After it, you can download the ID as a JSON file.
 
-<img src="/_media/classes/rdatascience/screenshot_2024-10-31_at_9.00.50%E2%80%AFpm.png?w=600&amp;tok=b6c747" class="media" loading="lazy" alt="" width="600" />
+![](images/google13.png)
 
 Click on "Done" to complete it.
 
@@ -82,4 +105,46 @@ library(googleCloudVisionR)
 API.call <- gcv_get_image_annotations(imagePaths = "calm1.png", feature="FACE_DETECTION")
 API.call
 ```
+
+# Use Amazon Rekognition
+
+To use the API, we need to get the API key. The following steps can be followed.
+
+1. First, log in Amazon AWS through the link [https://aws.amazon.com](https://aws.amazon.com). If you don't have an account yet, please create one first.
+2. After log in, go to IAM, e.g., by searching for it. 
+![](images/aws1.png)
+3. Click the link "Users" and then "Create user".
+![](images/aws2.png)
+![](images/aws3.png)
+4. Create a name for the user 
+![](images/aws4.png)
+5. Choose the default settings and click on "Next" to create the user.  
+![](images/aws5.png)
+![](images/aws6.png)
+7. Click on the newly created user and then "Add permissions"  
+![](images/aws7.png)
+![](images/aws8.png)
+7. You choose "Attach policies directly" and then search for "Rekognition" and give full access.  
+![](images/aws9.png)
+![](images/aws10.png)
+9. Then, we will "Create access key" for use with R.  
+![](images/aws11.png)
+![](images/aws12.png)
+![](images/aws13.png)
+9. Finally, copy or download your access key. Save it in a safe place.  
+![](images/aws14.png)
+
+To use the key in R, use the code below:
+
+```
+library(paws)
+library(paws.machine.learning)
+
+Sys.setenv(
+  AWS_ACCESS_KEY_ID = "you access key",
+  AWS_SECRET_ACCESS_KEY = "your secrete access key",
+  AWS_REGION = "us-east-1" ## change this to your AWS region
+)
+```
+
 
